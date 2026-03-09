@@ -5,7 +5,12 @@ load_dotenv()
 
 class Config:
     SECRET_KEY = os.getenv("SECRET_KEY", "your_default_secret")
-    CLIENT_SECRETS_FILE = os.getenv("CLIENT_SECRETS_FILE", "client_secret.json")
+    
+    # local development file
+    CLIENT_SECRETS_FILE = os.getenv("CLIENT_SECRETS_FILE", "client_secrets.json")
+
+    # production (Render) env variable containing JSON string
+    CLIENT_SECRETS_JSON = os.getenv("CLIENT_SECRETS_JSON")
 
     SCOPES = [
         'https://www.googleapis.com/auth/calendar.readonly',
