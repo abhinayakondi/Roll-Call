@@ -13,7 +13,7 @@ export default function ShareDialog() {
   const [open, setOpen] = React.useState(false);
   const [loading, setLoading] = React.useState(false); // Track loading state
   const [sent, setSent] = React.useState(false); // Track if the report was sent
-  const [error, setError] = React.useState(null); // Track errors (optional)
+  const [error, setError] = React.useState<string | null>(null); // Track errors (optional)
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -27,12 +27,12 @@ export default function ShareDialog() {
     setSent(false); // Reset sent state when closing
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
     const formJson = Object.fromEntries(formData.entries());
-    const email = formJson.email;
+    const email = formJson.email as string;
 
     setLoading(true);
 
