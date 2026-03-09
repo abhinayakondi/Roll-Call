@@ -35,7 +35,7 @@ function ResponsiveAppBar() {
     // Fetch profile picture
     const fetchProfilePic = async () => {
       try {
-        const response = await fetch('http://localhost:5000/user/pfp', {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/user/pfp`, {
           method: 'GET',
           credentials: 'include',
         });
@@ -64,7 +64,7 @@ function ResponsiveAppBar() {
 
   const handleLogout = async () => {
     try {
-      const response = await fetch('http://localhost:5000/auth/logout', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/logout`, {
         method: 'GET',
         credentials: 'include', // Include cookies if session-based auth is used
       });

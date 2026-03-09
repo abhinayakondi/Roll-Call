@@ -9,7 +9,7 @@ function DBport() {
 
   useEffect(() => {
       const fetchData = async () => {
-      const response = await axios.get('http://localhost:5000/api/data');
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/data`);
       setData(response.data);
     }
 
@@ -19,7 +19,7 @@ function DBport() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault(); 
     const newItem = { firstName, lastName };
-    const response = await axios.post('http://localhost:5000/api/data', newItem);
+    const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/data`, newItem);
     setData([...data, response.data]);
     setField1('');
     setField2('');

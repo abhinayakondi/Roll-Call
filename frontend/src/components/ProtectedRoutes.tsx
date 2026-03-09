@@ -7,7 +7,7 @@ interface ProtectedRouteProps {
 
 const checkAuthStatus = async () => {
     try {
-        const response = await fetch('http://localhost:5000/auth/status', {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/status`, {
             method: "GET",
             credentials: "include", // Include session cookies
         });

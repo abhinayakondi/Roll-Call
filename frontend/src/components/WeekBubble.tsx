@@ -9,7 +9,7 @@ function WeekBubble() {
 
     const fetchWeekEvents = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/cal/week_events', {
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/cal/week_events`, {
                 withCredentials: true, // Ensures credentials (like cookies) are sent
             });
             setWeekEvents(response.data);

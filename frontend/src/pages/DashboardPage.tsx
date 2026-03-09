@@ -25,7 +25,7 @@ const DashboardPage = () => {
   useEffect(() => {
     const fetchSettings = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/setting/get_settings', {withCredentials: true});
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/setting/get_settings`, {withCredentials: true});
         console.log(response.data);
         setSettings(response.data);
         setGreeting(response.data.greeting || 'word');
@@ -70,7 +70,7 @@ const DashboardPage = () => {
     setGreeting(newGreeting);
 
     try {
-      await axios.post('http://localhost:5000/setting/update_nonevent_setting', 
+      await axios.post(`${import.meta.env.VITE_API_URL}/setting/update_nonevent_setting`, 
         {
           setting_key: 'greeting',
           new_value: newGreeting,
@@ -87,7 +87,7 @@ const DashboardPage = () => {
     setOrganize(newOrganize);
 
     try {
-      await axios.post('http://localhost:5000/setting/update_nonevent_setting', 
+      await axios.post(`${import.meta.env.VITE_API_URL}/setting/update_nonevent_setting`, 
         {
           setting_key: 'organize_by',
           new_value: newOrganize,
@@ -105,7 +105,7 @@ const DashboardPage = () => {
 
     try {
       console.log('Payload:', { setting_key: 'notification', new_value: newNotification });
-      await axios.post('http://localhost:5000/setting/update_nonevent_setting', 
+      await axios.post(`${import.meta.env.VITE_API_URL}/setting/update_nonevent_setting`, 
         {
           setting_key: 'notification',
           new_value: newNotification,
@@ -125,7 +125,7 @@ const DashboardPage = () => {
     setSettings(updatedSettings);
     try {
       await axios.post(
-        'http://localhost:5000/setting/update_event_setting',
+        `${import.meta.env.VITE_API_URL}/setting/update_event_setting`,
         { setting_key: key, field_key: 'category', new_value: newValue },
         { withCredentials: true }
       );
@@ -151,7 +151,7 @@ const DashboardPage = () => {
     setSettings(updatedSettings);
     try {
       await axios.post(
-        'http://localhost:5000/setting/update_event_setting',
+        `${import.meta.env.VITE_API_URL}/setting/update_event_setting`,
         { setting_key: key, field_key: 'priority', new_value: newValue },
         { withCredentials: true }
       );
@@ -176,7 +176,7 @@ const DashboardPage = () => {
     setFutureWeeks(newValue);
     try {
       await axios.post(
-        'http://localhost:5000/setting/update_nonevent_setting',
+        `${import.meta.env.VITE_API_URL}/setting/update_nonevent_setting`,
         {
           setting_key: 'future_weeks',
           new_value: newValue,

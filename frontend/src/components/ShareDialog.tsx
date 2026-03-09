@@ -37,10 +37,7 @@ export default function ShareDialog() {
     setLoading(true);
 
     try {
-      const response = await fetch(
-        `http://localhost:5000/report/share?recipient=${encodeURIComponent(
-          email
-        )}`,
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/report/share?recipient=${email}`,
         {
           method: "GET",
           credentials: "include", // Include session cookies

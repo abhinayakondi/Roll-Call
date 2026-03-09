@@ -8,7 +8,7 @@ function FutureBubble() {
 
     const fetchFutureEvents = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/cal/future_events', {
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/cal/future_events`, {
                 withCredentials: true, // Ensure credentials like cookies are sent
             });
             setFutureEvents(response.data); // Update state with fetched data
