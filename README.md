@@ -1,7 +1,6 @@
 # **RollCall**
 
-## 🚀 Live Demo
-[Live Demo](https://roll-call-fzwu.onrender.com)
+# 🚀[Live Demo](https://roll-call-fzwu.onrender.com)
 
 ## Motivation
 
