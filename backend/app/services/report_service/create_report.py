@@ -1,6 +1,9 @@
+import os
 from datetime import datetime
 from app.routes.calendar import get_day_events, get_week_events, get_future_events, get_to_do
 from app.services.user_service import get_name
+
+FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:3000")
 
 def get_report_html(google_id, shared=False):
     """Generate the HTML report."""
@@ -12,7 +15,7 @@ def get_report_html(google_id, shared=False):
 
     if shared:
         greeting = f"Hello, {name} shared their Roll Call with you!"
-        footer = f"Get your own! http://localhost:3000/"
+        footer = f"Get your own! {FRONTEND_URL}/"
     else:
         greeting = f"Hello {name}, here is your Roll Call!"
         footer = f"Good luck, see you tomorrow!"

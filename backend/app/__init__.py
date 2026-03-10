@@ -14,6 +14,8 @@ def create_app():
     # Load environment variables from `.env` file
     load_dotenv()
 
+    FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:3000")
+
     app = Flask(__name__)
     
     app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
@@ -22,9 +24,9 @@ def create_app():
     CORS(app, 
          supports_credentials=True,
          origins=[
-        "http://localhost:3000",
-        "https://roll-call-fzwu.onrender.com"
-        ],
+         "http://localhost:3000",
+         FRONTEND_URL
+         ],
          methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
          allow_headers=["Content-Type", "Authorization"],
          expose_headers=["Content-Type"])

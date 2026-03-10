@@ -1,9 +1,12 @@
+import os
 from flask import redirect, session, request, url_for, jsonify
 from ..services.auth_service.google_auth import initiate_google_auth, handle_oauth_callback
 from app.services.auth_service.token import save_session, decode_google_id_token
 from app.services.user_service import create_user, get_user, user_in_db, store_creds, update_user
 from . import auth
 
+# Frontend URL (works for both local + production)
+FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:3000")
 
 """
 This route is used both signup and login (first and revisiting user). 
@@ -43,14 +46,14 @@ def callback():
             user = update_user(user_info)  # update any profile info that was changed in google account from last login
             store_creds(user, credentials_dict)  # update creds on login
             # redirect to main page
-            return redirect("http://localhost:3000/today")
+            return redirect(f"{FRONTEND_URL}/today")
         
         # new user !
         else:
             user = create_user(user_info) 
             store_creds(user, credentials_dict)  # store creds on signup
             # redirect to the user dashboard to get their settings 
-            return redirect("http://localhost:3000/dashboard")
+            return redirect(f"{FRONTEND_URL}/dashboard")
 
     except Exception as e:
         return f"An error occurred during the OAuth process: {str(e)}", 400
