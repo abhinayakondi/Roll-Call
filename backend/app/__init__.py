@@ -1,9 +1,10 @@
-from flask import Flask, session
+from flask import Flask, app, session
 from datetime import timedelta
 from flask_cors import CORS
 from dotenv import load_dotenv
 import os
 from mongoengine import connect
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 
 def create_app():
@@ -15,16 +16,23 @@ def create_app():
 
     app = Flask(__name__)
     
+    app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
+
     # Configure CORS with more explicit settings
     CORS(app, 
          supports_credentials=True,
-         origins=["http://localhost:3000"],
+         origins=[
+        "http://localhost:3000",
+        "https://roll-call-fzwu.onrender.com"
+        ],
          methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
          allow_headers=["Content-Type", "Authorization"],
          expose_headers=["Content-Type"])
     
     app.secret_key = os.getenv("SECRET_KEY", "fallback_secret_key")
     app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=31)
+    app.config["SESSION_COOKIE_SECURE"] = True
+    app.config["SESSION_COOKIE_SAMESITE"] = "None"
 
     print(f"App initialized with secret key: {app.secret_key}") 
 
